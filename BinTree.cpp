@@ -1,0 +1,9 @@
+﻿#include <iostream>
+#include "Tree.h"
+
+using namespace std;
+
+int main()
+{
+    std::cout << "Hello World!\n";
+}
