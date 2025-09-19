@@ -2,3 +2,11 @@
 #include <cassert>
 
 using namespace std;
+
+/// <summary>
+/// Тесты
+/// </summary>
+void test()
+{
+	
+}
