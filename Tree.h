@@ -149,6 +149,36 @@ public:
 	{
 		deletetree<T>(root);
 	}
+
+	/// <summary>
+	/// Очистка дерева
+	/// </summary>
+	void clear()
+	{
+		deletetree<T>(root);
+	}
+
+	/// <summary>
+	/// Проверка на пустое дерево
+	/// </summary>
+	/// <returns>1-пустое, 0-непустое</returns>
+	bool empty()
+	{
+		if (!root)
+		{
+			return 1;
+		}
+		return 0;
+	}
+
+	/// <summary>
+	/// Получение корня дерева
+	/// </summary>
+	/// <returns>Корень дерева</returns>
+	BinTreeNode<T>* get_root()
+	{
+			return root;
+	}
 };
 
 /// <summary>
