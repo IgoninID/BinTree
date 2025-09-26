@@ -58,9 +58,9 @@ public:
 	/// </summary>
 	/// <param name="other">Другое бинарное дерево поиска</param>
 	/// <returns>Копию другого дерева</returns>
-	BinaryTree& operator=(const BinaryTree& other)
+	BinaryTree<T>& operator =(const BinaryTree<T>& other)
 	{
-		return BinaryTree(other);
+		return BinaryTree<T>(other);
 	}
 
 	/// <summary>
@@ -68,9 +68,13 @@ public:
 	/// </summary>
 	/// <param name="other">Другое бинарное дерево поиска</param>
 	/// <returns>Перемещенное дерево</returns>
-	BinaryTree& operator=(BinaryTree&& other)
+	BinaryTree<T>& operator =(BinaryTree<T>&& other)
 	{
-		return BinaryTree(other);
+		if (this != &other)
+		{
+			return BinaryTree<T>(other);
+		}
+		return *this;
 	}
 
 	/// <summary>
