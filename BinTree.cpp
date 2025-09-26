@@ -7,5 +7,9 @@ using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    test_void();
+    test_one();
+    test_deg();
+    test_comp();
+    test_perf();
 }

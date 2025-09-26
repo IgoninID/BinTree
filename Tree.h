@@ -21,6 +21,7 @@ public:
 	BinaryTree()
 	{
 		size = 0;
+		root = nullptr;
 	}
 
 	/// <summary>
@@ -101,7 +102,7 @@ public:
 	/// <param name="data">Данные для вставки в дерево</param>
 	void insert(T data)
 	{
-		insertintree<T>(data, root);
+		root = insertintree<T>(data, root);
 		size += 1;
 	}
 
@@ -112,8 +113,29 @@ public:
 	/// <param name="data">Удаляемые данные</param>
 	void remove(T data)
 	{
-		removeNode<T>(root, data);
-		size -= 1;
+		//if (size == 1)
+		//{
+		//	removeNode<T>(root, data);
+		//	size -= 1;
+		//	root == nullptr;
+		//}
+		//removeNode<T>(root, data);
+		//size -= 1;
+
+		try
+		{
+			findintree(data);
+			removeNode<T>(root, data);
+			size -= 1;
+			if (size == 0)
+			{
+				root = nullptr;
+			}
+		}
+		catch (out_of_range)
+		{
+			return;
+		}
 	}
 
 	/// <summary>
@@ -194,6 +216,26 @@ public:
 };
 
 /// <summary>
-/// Тесты
+/// Тестовая функция для проверки работы пустого дерева
 /// </summary>
-void test();
+void test_void();
+
+/// <summary>
+/// Тестовая функция для проверки работы дерева из одного элемента
+/// </summary>
+void test_one();
+
+/// <summary>
+/// Тестовая функция для проверки работы совершенного дерева
+/// </summary>
+void test_perf();
+
+/// <summary>
+/// Тестовая функция для проверки работы строгого дерева
+/// </summary>
+void test_comp();
+
+/// <summary>
+/// Тестовая функция для проверки работы вырожденного дерева
+/// </summary>
+void test_deg();
