@@ -1,3 +1,5 @@
+// Автор: Игонин В.Ю.
+
 #include "Tree.h"
 #include <cassert>
 

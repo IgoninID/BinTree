@@ -1,3 +1,5 @@
+// Автор: Игонин В.Ю.
+
 #pragma once
 #include "../BinTreeNode/Node.h"
 
@@ -72,6 +74,7 @@ public:
 
 	/// <summary>
 	/// Вывод прохода дерева
+	/// Сложность O(n)
 	/// </summary>
 	/// <param name="choice">Выбор прохода</param>
 	void print(PATHS choice)
@@ -82,6 +85,7 @@ public:
 
 	/// <summary>
 	/// Вывод прохода дерева в вектор
+	/// Сложность O(n)
 	/// </summary>
 	/// <param name="choice">Выбор прохода</param>
 	/// <param name="vec">Вектор для записи результата прохода</param>
@@ -92,6 +96,7 @@ public:
 
 	/// <summary>
 	/// Вставка в дерево
+	/// Сложность O(n) - несбалансированное, O(logn) - сбалансированное
 	/// </summary>
 	/// <param name="data">Данные для вставки в дерево</param>
 	void insert(T data)
@@ -102,6 +107,7 @@ public:
 
 	/// <summary>
 	/// Удаление узла из дерева
+	/// Сложность O(n) - несбалансированное, O(logn) - сбалансированное
 	/// </summary>
 	/// <param name="data">Удаляемые данные</param>
 	void remove(T data)
@@ -112,6 +118,7 @@ public:
 
 	/// <summary>
 	/// Поиск данных в дереве
+	/// Сложность O(n) - несбалансированное, O(logn) - сбалансированное
 	/// </summary>
 	/// <param name="data">Данные для поиска</param>
 	/// <returns>Данные если они есть в дереве</returns>
@@ -122,6 +129,7 @@ public:
 
 	/// <summary>
 	/// Получение количества узлов дерева
+	/// Сложность O(n)
 	/// </summary>
 	/// <returns>Количество узлов дерева</returns>
 	size_t Size()
@@ -135,6 +143,7 @@ public:
 
 	/// <summary>
 	/// Получение глубины дерева
+	/// Сложность O(n)
 	/// </summary>
 	/// <returns>Глубина дерева</returns>
 	int Depth()
@@ -156,10 +165,12 @@ public:
 	void clear()
 	{
 		deletetree<T>(root);
+		root = nullptr;
 	}
 
 	/// <summary>
 	/// Проверка на пустое дерево
+	/// Сложность O(1)
 	/// </summary>
 	/// <returns>1-пустое, 0-непустое</returns>
 	bool empty()
@@ -173,6 +184,7 @@ public:
 
 	/// <summary>
 	/// Получение корня дерева
+	/// Сложность O(1)
 	/// </summary>
 	/// <returns>Корень дерева</returns>
 	BinTreeNode<T>* get_root()
