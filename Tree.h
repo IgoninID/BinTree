@@ -3,6 +3,7 @@
 #pragma once
 #include "../BinTreeNode/Node.h"
 #include "../InterfIter/AbstrIter.h"
+#include <stack>
 
 /// <summary>
 /// Шаблонный класс бинарное дерева поиска
@@ -13,34 +14,59 @@ class BinaryTree
 {
 private:
 	BinTreeNode<T>* root; // указатель на корень дерева
-	mutable vector<T>* last_vec = nullptr;
 	size_t size; // количество узлов дерева
 public:
 
 	class Iterator : public AbstrIter<T>
 	{
-		vector<T>* vec;
-		size_t ind;
+		stack<BinTreeNode<T>*> nodes;
+		BinTreeNode<T>* curr;
+	private:
+		void next()
+		{
+			if (nodes.empty())
+			{
+				curr = nullptr;
+				return;
+			}
+			curr = nodes.top();
+			nodes.pop();
+			if (curr->right)
+			{
+				pushLeft(curr->right);
+			}
+
+		}
 	public:
 
-		Iterator(vector<T>* vec = nullptr, size_t i = 0) : vec(vec), ind(i) {}
+		Iterator(BinTreeNode<T>* root = nullptr) : curr(nullptr) 
+		{
+			pushLeft(root);
+			next();
+		}
+
+		void pushLeft(BinTreeNode<T>* node)
+		{
+			while (node)
+			{
+				nodes.push(node);
+				node = node->left;
+			}
+		}
 
 		Iterator& operator ++() override
 		{
-			if (vec && ind < vec->size())
-			{
-				++ind;
-			}
+			next();
 			return *this;
 		}
 
 		T& operator *() const override
 		{
-			if (!vec || ind >= vec->size())
+			if (!curr)
 			{
 				throw out_of_range("Элемент не существует");
 			}
-			return (*vec)[ind];
+			return curr->data;
 		}
 
 		bool operator !=(const AbstrIter<T>& other) const override
@@ -50,26 +76,18 @@ public:
 			{
 				return true;
 			}
-			return vec != it->vec || ind != it->ind;
+			return this->curr != it->curr;
 		}
 	};
 
 	Iterator begin() const
 	{
-		vector<T>* vec = new vector<T>();
-		print(lnr, *vec);
-		Iterator it_beg(vec, 0);
-		last_vec = vec;
-		return it_beg;
+		return Iterator(root);
 	}
 
 	Iterator end() const
 	{
-		if (!last_vec)
-		{
-			return Iterator(nullptr, 0);
-		}
-		return Iterator(last_vec, last_vec->size());
+		return Iterator(nullptr);
 	}
 
 	/// <summary>
