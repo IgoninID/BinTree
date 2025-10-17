@@ -38,7 +38,7 @@ public:
 		{
 			if (!vec || ind >= vec->size())
 			{
-				throw out_of_range("Ёлемент не существует")
+				throw out_of_range("Ёлемент не существует");
 			}
 			return (*vec)[ind];
 		}
