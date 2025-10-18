@@ -17,11 +17,17 @@ private:
 	size_t size; // количество узлов дерева
 public:
 
+	/// <summary>
+	/// Итератор inorder(LNR) бинарного дерева поиска
+	/// </summary>
 	class Iterator : public AbstrIter<T>
 	{
-		stack<BinTreeNode<T>*> nodes;
-		BinTreeNode<T>* curr;
+		stack<BinTreeNode<T>*> nodes; // стек узлов
+		BinTreeNode<T>* curr; // указатель на узел, на который указывает итератор
 	private:
+		/// <summary>
+		/// Извлечение следующего элемента из стека
+		/// </summary>
 		void next()
 		{
 			if (nodes.empty())
@@ -29,8 +35,10 @@ public:
 				curr = nullptr;
 				return;
 			}
+
 			curr = nodes.top();
 			nodes.pop();
+
 			if (curr->right)
 			{
 				pushLeft(curr->right);
@@ -39,12 +47,20 @@ public:
 		}
 	public:
 
+		/// <summary>
+		/// Конструктор итератора
+		/// </summary>
+		/// <param name="root">Корень дерева</param>
 		Iterator(BinTreeNode<T>* root = nullptr) : curr(nullptr) 
 		{
-			pushLeft(root);
+			pushLeft(root); // заполнение всеми левыми потомками
 			next();
 		}
 
+		/// <summary>
+		/// Помещение в стек всех левых узлов дерева
+		/// </summary>
+		/// <param name="node">Указатель на узел дерева</param>
 		void pushLeft(BinTreeNode<T>* node)
 		{
 			while (node)
@@ -54,12 +70,21 @@ public:
 			}
 		}
 
+		/// <summary>
+		/// Переход к следующему элементу (префиксный инкремент)
+		/// </summary>
+		/// <returns></returns>
 		Iterator& operator ++() override
 		{
 			next();
 			return *this;
 		}
 
+		/// <summary>
+		/// Разыименование итератора - доступ к значению текущего узла
+		/// </summary>
+		/// <exception cref = "out_of_range Выбрасывается, если элемент не найден."></exception>
+		/// <returns></returns>
 		T& operator *() const override
 		{
 			if (!curr)
@@ -69,6 +94,11 @@ public:
 			return curr->data;
 		}
 
+		/// <summary>
+		/// Сравнение итераторов на неравенство, равны если оба указывают на один узел
+		/// </summary>
+		/// <param name="other"></param>
+		/// <returns></returns>
 		bool operator !=(const AbstrIter<T>& other) const override
 		{
 			const Iterator* it = dynamic_cast<const Iterator*>(&other);
@@ -80,11 +110,19 @@ public:
 		}
 	};
 
+	/// <summary>
+	/// Вызов конструктора итератора
+	/// </summary>
+	/// <returns>Итератор указывающий на первый элемент</returns>
 	Iterator begin() const
 	{
 		return Iterator(root);
 	}
 
+	/// <summary>
+	/// Вызов конструктора с итератором с curr == nullptr
+	/// </summary>
+	/// <returns>Итератор указывающий за пределы дерева</returns>
 	Iterator end() const
 	{
 		return Iterator(nullptr);
