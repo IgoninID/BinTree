@@ -12,6 +12,12 @@ int main()
     test_deg();
     test_comp();
     test_perf();
+    test_mult_beg();
+    test_inc();
+    test_def();
+    test_compar();
+    test_iter();
+    test_case();
     BinaryTree<int> tree(10);
     tree.insert(6);
     tree.insert(20);

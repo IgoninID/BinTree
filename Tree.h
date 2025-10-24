@@ -356,3 +356,15 @@ void test_comp();
 /// Тестовая функция для проверки работы вырожденного дерева
 /// </summary>
 void test_deg();
+
+void test_mult_beg();
+
+void test_inc();
+
+void test_def();
+
+void test_compar();
+
+void test_iter();
+
+void test_case();
